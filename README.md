@@ -1,4 +1,4 @@
-# DbDoc Schema
+# DbDoc
 
 ## Tools
 
