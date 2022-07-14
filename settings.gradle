@@ -1,0 +1,4 @@
+rootProject.name = 'dbdoc'
+
+include 'patch'
+include 'dbdoc'

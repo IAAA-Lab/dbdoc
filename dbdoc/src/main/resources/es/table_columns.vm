@@ -1,0 +1,19 @@
+#* @vtlvariable name="table" type="schemacrawler.schema.Table" *#
+#* @vtlvariable name="formatter" type="es.unizar.iaaa.dbdoc.formatter.FormatterEs" *#
+#* @vtlvariable name="config" type="es.unizar.iaaa.dbdoc.model.Configuration" *#
+
+[caption=]
+.Columnas
+[%autowidth]
+|===
+| Tipo | Columna | Tipo | Etiquetas | Descripción
+
+#foreach($column in $table.columns)
+#set($md = $config.schema.getColumn($table.name, $column.name))
+|#if($column.isPartOfPrimaryKey()) PK #end #if($column.isPartOfUniqueIndex() && !$column.isPartOfPrimaryKey()) UQ #end #if($column.isPartOfForeignKey()) FK #end
+| `$column.name`
+| $formatter.columnTypeName($column)
+| #foreach($tag in $md.tags) `$tag` #if( $foreach.hasNext ),#end #end
+| #if($md) $md.description #end
+#end
+|===

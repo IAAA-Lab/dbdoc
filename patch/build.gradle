@@ -1,0 +1,17 @@
+plugins {
+    id "com.lazan.java-monkey-patch" version "1.0"
+}
+
+group = 'us.fatehi'
+archivesBaseName = 'schemacrawler-scripting'
+version = '16.16.14-patched'
+
+repositories {
+    mavenCentral()
+}
+
+monkeyPatch.target = 'us.fatehi:schemacrawler-scripting:16.16.14'
+
+dependencies {
+    compileOnly 'us.fatehi:schemacrawler-scripting:16.16.14'
+}

@@ -1,0 +1,23 @@
+#* @vtlvariable name="identifiers" type="schemacrawler.schemacrawler.Identifiers" *#
+#* @vtlvariable name="table" type="schemacrawler.schema.Table" *#
+#* @vtlvariable name="config" type="es.unizar.iaaa.dbdoc.model.Configuration" *#
+#* @vtlvariable name="formatter" type="es.unizar.iaaa.dbdoc.formatter.FormatterEs" *#
+
+#if ($table.tableType == "table")
+=== $formatter.formatTitle($table.name, $config)
+    #if($config.schema.hasEntity($table.name))
+$formatter.trimIndent($config.schema.getEntitity($table.name).description)
+    #end
+    #parse("$config.output.language/table_columns.vm")
+    #if($table.hasPrimaryKey())
+        #parse("$config.output.language/table_primary_key.vm")
+    #end
+    #if(!$table.importedForeignKeys.isEmpty())
+        #parse("$config.output.language/table_foreign_keys.vm")
+    #end
+    #if(!$table.indexes.isEmpty())
+        #parse("$config.output.language/table_indexes.vm")
+    #end
+'''
+<<<
+#end

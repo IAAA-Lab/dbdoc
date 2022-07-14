@@ -1,0 +1,20 @@
+plugins {
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+dependencies {
+    implementation project('dbdoc')
+}
+
+application {
+    mainClass = 'es.unizar.iaaa.dbdoc.DbDoc'
+}
+
+mainClassName = 'es.unizar.iaaa.dbdoc.DbDoc'

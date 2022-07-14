@@ -1,0 +1,33 @@
+#* @vtlvariable name="config" type="es.unizar.iaaa.dbdoc.model.Configuration" *#
+#* @vtlvariable name="formatter" type="es.unizar.iaaa.dbdoc.formatter.FormatterEs" *#
+= $title
+:reproducible:
+:listing-caption: Listing
+:source-highlighter: rouge
+:toc: left
+:title-page:
+:imagesdir: ./images
+:lang: es
+include::locale/attributes.adoc[]
+#set($noop = "[]")
+
+#foreach($file in $config.output.includePre)
+include::$file$noop
+#end
+
+== Tablas
+#foreach($schema in $catalog.schemas)
+    #foreach($table in $formatter.sortTables($catalog.getTables($schema), $config))
+        #parse("$config.output.language/table.vm")
+    #end
+#end
+
+== Diagrama
+image::schema.svg[]
+
+#foreach($file in $config.output.includePost)
+include::$file$noop
+#end
+
+#* @vtlvariable name="catalog" type="schemacrawler.schema.Catalog" *#
+#parse("$config.output.language/system_information.vm")

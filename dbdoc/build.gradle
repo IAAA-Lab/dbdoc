@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+}
+
+group = 'es.unizar.iaaa'
+version = '1.0.0-RELEASE'
+
+dependencies {
+    implementation project(':patch')
+
+    implementation 'info.picocli:picocli:4.6.3'
+
+    implementation 'us.fatehi:schemacrawler:16.16.14'
+    implementation 'us.fatehi:schemacrawler-diagram:16.16.14'
+
+    implementation 'com.h2database:h2:1.4.200'
+    implementation 'org.apache.velocity:velocity-engine-core:2.3'
+    implementation 'org.slf4j:slf4j-simple:1.7.30'
+    implementation 'com.typesafe:config:1.4.2'
+
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'info.picocli:picocli-codegen:4.6.3'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.24'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+}
+
+compileJava {
+    options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
+}
+
+test {
+    useJUnitPlatform()
+}
+
